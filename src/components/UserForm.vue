@@ -11,6 +11,7 @@ const emit = defineEmits(['submit'])
 const emptyForm = () => ({
   name: '',
   email: '',
+  age: null,
   active: false,
 })
 
@@ -29,6 +30,7 @@ watch(
       form.value = {
         name: newUser.name ?? '',
         email: newUser.email ?? '',
+        age: Number.isFinite(Number(newUser.age)) ? Number(newUser.age) : null,
         active: Boolean(newUser.active),
       }
     } else {
@@ -47,9 +49,13 @@ const handleSubmit = () => {
   if (!String(form.value.name).trim()) {
     return
   }
+  if (form.value.age === null || Number(form.value.age) < 0) {
+    return
+  }
   emit('submit', {
     name: String(form.value.name).trim(),
     email: String(form.value.email).trim(),
+    age: Number(form.value.age),
     active: form.value.active,
   })
   if (!props.user) {
@@ -73,6 +79,14 @@ const handleSubmit = () => {
       class="border p-2 w-full mb-2 rounded"
       :class="emailError ? 'border-red-500' : ''"
       placeholder="E-mail"
+      :disabled="disabled"
+    />
+    <input
+      type="number"
+      v-model.number="form.age"
+      class="border p-2 w-full mb-2 rounded"
+      placeholder="Age"
+      min="0"
       :disabled="disabled"
     />
     <p v-if="emailError" class="text-sm text-red-600 mb-2">{{ emailError }}</p>

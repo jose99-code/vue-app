@@ -32,6 +32,7 @@ const emit = defineEmits(['edit', 'delete'])
           </span>
         </div>
         <p class="text-sm text-gray-500">{{ user.email }}</p>
+        <p class="text-xs text-gray-600 mt-1">Age: {{ user.age ?? '-' }}</p>
       </div>
 
       <div class="flex gap-2 items-start shrink-0">
