@@ -1,7 +1,13 @@
 <script setup>
-import UserPage from './pages/UserPage.vue'
+import { RouterView } from 'vue-router'
+import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-  <UserPage />
+  <div class="min-h-screen bg-gray-50 text-gray-900">
+    <AppHeader />
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>

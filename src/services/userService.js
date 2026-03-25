@@ -2,6 +2,8 @@ import { fetcher } from "./api";
 
 export const getUsers = () => fetcher('/users');
 
+export const getUser = (id) => fetcher(`/users/${id}`);
+
 export const createUser = (data) => fetcher('/users', {
     method: 'POST',
     body: JSON.stringify(data),
